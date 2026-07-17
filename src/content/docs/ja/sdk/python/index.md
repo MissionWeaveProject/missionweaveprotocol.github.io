@@ -68,8 +68,7 @@ uv run missionweaveprotocol-demo --workdir .missionweaveprotocol/poc
 この command は canonical JSON
 report を 1 件生成し、必要な動作が欠けている場合は nonzero
 status で終了します。deterministic scenario は、2 つの concurrent
-Mission、共有 Worker、child
-Mission、Agent 間の clarification、scheduling、checkpoint-only
+Mission、共有 Worker、子ミッション、Agent 間の clarification、scheduling、checkpoint-only
 preemption、recovery、Coordinator verification、正確な human
 Approval を対象とします。
 

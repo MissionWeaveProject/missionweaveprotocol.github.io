@@ -98,8 +98,8 @@ Datenbank darf den autoritativen Mission-Zustand nicht verändern.
 - Exklusive Arbeit wird durch Ownership Epoch und Execution Lease geschützt.
 - Akzeptierte Event und bestätigte Message sind append-only.
 - Mission-Kontext und Anmeldedaten sind standardmäßig isoliert.
-- Budgets und Berechtigungen von WorkItem und Child Mission dürfen die ihrer
-  übergeordneten Elemente nicht überschreiten.
+- Eine untergeordnete Mission darf mit ihren Budgets und Berechtigungen die
+  übergeordnete Mission nicht überschreiten; dasselbe gilt für WorkItem.
 - Der Abschluss einer Root Mission erfordert die menschliche Approval einer
   genauen Revision und eines genauen Artifact-Satzes.
 - Agent veröffentlichen die für Audits erforderlichen Entscheidungen, Eingaben,

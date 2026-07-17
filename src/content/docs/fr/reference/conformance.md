@@ -13,8 +13,8 @@ l’implémentation** :
 
 | Résultat attendu | Cas | Répertoire canonique                                                                                                                 |
 | ---------------- | --: | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Valid            |  22 | [`conformance/vectors/valid/`](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/conformance/vectors/valid)     |
-| Invalid          |  21 | [`conformance/vectors/invalid/`](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/conformance/vectors/invalid) |
+| Valide           |  22 | [`conformance/vectors/valid/`](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/conformance/vectors/valid)     |
+| Invalide         |  21 | [`conformance/vectors/invalid/`](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/conformance/vectors/invalid) |
 
 Le fichier canonique
 [`manifest.json`](https://github.com/missionweaveprotocol/missionweaveprotocol/blob/main/conformance/manifest.json)
@@ -26,7 +26,7 @@ pour les exigences normatives d’utilisation.
 ## Ce que prouvent les vecteurs
 
 L’exécution des 43 cas vérifie qu’une implémentation respecte les règles
-structurelles du protocole pour les documents. Les cas invalid couvrent des
+structurelles du protocole pour les documents. Les cas invalides couvrent des
 formes délibérément rejetées, telles que des signatures manquantes, des états de
 cycle de vie invalides, un ownership absent, un comportement d’extension
 dangereux ou une provenance incohérente.

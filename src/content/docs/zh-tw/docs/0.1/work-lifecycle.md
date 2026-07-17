@@ -74,7 +74,7 @@ verified
 
 ## 先提供 Evidence，再核准
 
-Worker 的宣告不足以證明完成。提交內容必須包含對應到驗收標準的 Artifact 和 Evidence。Coordinator 評審應驗證 Artifact 完整性，在可用時執行確定性檢查，為定性標準請求 reviewer
+Worker 的宣告不足以證明完成。提交內容必須包含對應到驗收標準的 Artifact 和 Evidence。Coordinator 審查應驗證 Artifact 完整性，在可用時執行確定性檢查，為定性標準請求 reviewer
 Agent 提供 Evidence，並保留結果。
 
 所有必需的 WorkItem 均驗證完成後，Coordinator 提交特定 Mission 修訂版本和 Artifact 集合。MissionOwner 隨後簽署最終 Approval 或請求變更。變更請求會重新開啟同一個 Mission，而不會刪除之前的提交。
@@ -82,4 +82,4 @@ Agent 提供 Evidence，並保留結果。
 完整狀態轉換和權限規則請閱讀規範性
 [WorkItem 狀態機](https://github.com/missionweaveprotocol/missionweaveprotocol/blob/main/spec/PROTOCOL.md#102-workitem-state-machine)
 和
-[基於 Evidence 的評審](https://github.com/missionweaveprotocol/missionweaveprotocol/blob/main/spec/PROTOCOL.md#132-evidence-based-review)。
+[基於 Evidence 的審查](https://github.com/missionweaveprotocol/missionweaveprotocol/blob/main/spec/PROTOCOL.md#132-evidence-based-review)。

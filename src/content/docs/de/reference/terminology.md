@@ -18,8 +18,8 @@ definiert das normative Vokabular für MissionWeaveProtocol 0.1.
 **Organization**: Die vertrauenswürdige Governance-Grenze, die Agent
 registriert, Menschen authentifiziert und Richtlinien definiert.
 
-**Agent**: Ein unabhängig geplanter Runtime mit stabiler Identität und höchstens
-einer aktiven Session.
+**Agent**: Eine unabhängig geplante Laufzeitinstanz mit stabiler Identität und
+höchstens einer aktiven Session.
 
 **Agent Card**: Eine von der Organization signierte Beschreibung der stabilen
 Identität und verifizierter, versionierter Capability. Sie enthält weder
@@ -117,9 +117,9 @@ wird erst nach menschlicher Approval abgeschlossen.
 
 ## Hierarchie und Erweiterung
 
-**Child Mission**: Eine Mission, die zur Erledigung eines komplexen WorkItem
-einer übergeordneten Mission erstellt wird und deren Budgets und Autorität enger
-als beim übergeordneten Element begrenzt sind.
+**Untergeordnete Mission (Child Mission)**: Eine Mission, die zur Erledigung
+eines komplexen WorkItem einer übergeordneten Mission erstellt wird und deren
+Budgets und Autorität enger als bei der übergeordneten Mission begrenzt sind.
 
 **Follow-up Mission**: Eine neue Mission, die mit einer unveränderlichen,
 genehmigten Mission verknüpft wird, wenn später Korrektur oder zusätzliche

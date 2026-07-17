@@ -81,7 +81,7 @@ Authority 对该状态的变更进行串行化。
 - 排他工作通过 ownership epoch 和 lease epoch 的 fencing 防止旧所有者继续生效。
 - 已接受的 Event 和已提交的 Message 仅可追加。
 - Mission 上下文和凭据默认相互隔离。
-- WorkItem 和子 Mission 的预算与权限不得超过其父级。
+- WorkItem 和子任务的预算与权限不得超过其父级。
 - 根 Mission 只有在人类批准准确的修订版本和 Artifact 集合后才能完成。
 - Agent 发布审计所需的决策、输入、Evidence、阻塞因素和结果，而不是私有 chain-of-thought。
 

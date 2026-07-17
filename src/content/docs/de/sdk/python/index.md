@@ -70,10 +70,10 @@ uv run missionweaveprotocol-demo --workdir .missionweaveprotocol/poc
 
 Der Command erzeugt einen kanonischen JSON-Bericht und beendet sich mit einem
 Status ungleich null, wenn ein erforderliches Verhalten fehlt. Das
-deterministische Szenario umfasst zwei nebenläufige Mission, gemeinsam genutzte
-Worker, Child Mission, Klärung zwischen Peers, Planung, ausschließlich
-Checkpoint-basierte Preemption, Wiederherstellung, Verifizierung durch den
-Coordinator und genaue menschliche Approval.
+deterministische Szenario umfasst zwei nebenläufige Missionen, gemeinsam
+genutzte Worker, eine untergeordnete Mission, Klärung zwischen Peers, Planung,
+ausschließlich Checkpoint-basierte Preemption, Wiederherstellung, Verifizierung
+durch den Coordinator und genaue menschliche Approval.
 
 ## PostgreSQL-Integrationstests ausführen
 

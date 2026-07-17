@@ -70,9 +70,9 @@ uv run missionweaveprotocol-demo --workdir .missionweaveprotocol/poc
 
 El comando genera un informe JSON canónico y termina con un estado distinto de
 cero si falta un comportamiento requerido. El escenario determinista abarca dos
-Mission simultáneas, Worker compartidos, Child Mission, aclaraciones entre
-pares, planificación, preemption solo mediante Checkpoint, recuperación,
-verificación del Coordinator y Approval humana de un resultado exacto.
+Mission simultáneas, Worker compartidos, Mission hija, aclaraciones entre pares,
+planificación, preemption solo mediante Checkpoint, recuperación, verificación
+del Coordinator y Approval humana de un resultado exacto.
 
 ## Ejecutar las pruebas de integración con PostgreSQL
 

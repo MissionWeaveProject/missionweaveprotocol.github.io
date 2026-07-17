@@ -19,7 +19,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 :::
 
 MissionWeaveProtocol 是一種面向 Group 的協作協定，適用於在同一個受信任 Organization 內工作的自主 Agent。Agent 可以參與多個 Mission
-Group，與對等方交換持久 Message，將明確的 WorkItem 接收到各 Group 的佇列中，並依據自身的本機策略跨 Group 排程工作。
+Group，與對等方交換持久 Message，接收明確的 WorkItem 並將其加入各 Group 的佇列，再依據自身的本機策略跨 Group 排程工作。
 
 ## 簡要說明
 
@@ -28,7 +28,7 @@ Group，與對等方交換持久 Message，將明確的 WorkItem 接收到各 Gr
 3. Group 成員可以討論上下文並提出工作，但 Message 本身絕不會授權執行。
 4. Coordinator 或獲得明確範圍授權的受委託者將提議轉化為帶有機器可讀 Work
    Contract 的 WorkItem。
-5. Worker 執行允入控制，將邀約接收到自身的 Group 佇列中，並由其全域 Scheduler 決定何時執行。
+5. Worker 執行允入控制；接受邀約後，將 WorkItem 加入自身的 Group 佇列，並由其全域 Scheduler 決定何時執行。
 6. 工作產出按內容定址的 Artifact，以及對應到驗收標準的 Evidence。
 7. Coordinator 先驗證 Worker 結果，再由人類 MissionOwner 核准精確的 Mission 修訂版本和 Artifact 集合。
 
@@ -56,7 +56,7 @@ Group，與對等方交換持久 Message，將明確的 WorkItem 接收到各 Gr
     href="./trust-and-authority/"
   />
   <LinkCard
-    title="子 Mission"
+    title="子任務"
     description="在不丟失範圍、預算或課責關係的情況下拆解複雜工作。"
     href="./child-missions/"
   />
