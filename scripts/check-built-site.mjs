@@ -23,10 +23,16 @@ const requiredOutputs = [
   "sdk/python/index.html",
   "zh-cn/index.html",
   "zh-cn/docs/0.1/index.html",
+  "zh-tw/index.html",
+  "zh-tw/docs/0.1/index.html",
   "ja/index.html",
   "ja/docs/0.1/index.html",
   "es/index.html",
   "es/docs/0.1/index.html",
+  "fr/index.html",
+  "fr/docs/0.1/index.html",
+  "de/index.html",
+  "de/docs/0.1/index.html",
   "sitemap-index.xml",
   "llms.txt",
   "robots.txt",
@@ -57,7 +63,7 @@ async function targetExists(pathname) {
     base === "/" ? pathname.slice(1) : pathname.slice(base.length),
   ).replace(/^\//u, "");
 
-  if (/^(?:(?:zh-cn|ja|es)\/)?404\/$/u.test(relativePath)) {
+  if (/^(?:(?:zh-cn|zh-tw|ja|es|fr|de)\/)?404\/$/u.test(relativePath)) {
     try {
       await access(path.join(dist, "404.html"));
       return true;

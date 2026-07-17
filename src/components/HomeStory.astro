@@ -1,5 +1,5 @@
 ---
-type Locale = "en" | "zh-CN" | "ja" | "es";
+type Locale = "en" | "zh-CN" | "zh-TW" | "ja" | "es" | "fr" | "de";
 
 interface Props {
   locale?: Locale;
@@ -40,8 +40,11 @@ const { locale = "en" } = Astro.props as Props;
 const localePrefix = {
   en: "",
   "zh-CN": "zh-cn/",
+  "zh-TW": "zh-tw/",
   ja: "ja/",
   es: "es/",
+  fr: "fr/",
+  de: "de/",
 }[locale];
 const docsUrl = `${import.meta.env.BASE_URL}${localePrefix}docs/0.1/`;
 
@@ -212,6 +215,89 @@ const copies: Record<Locale, HomeCopy> = {
       link: "从 MissionWeaveProtocol 0.1 开始",
     },
   },
+  "zh-TW": {
+    intro: {
+      eyebrow: "為什麼選擇 MissionWeaveProtocol",
+      title: "Mission 不只是呼叫鏈。",
+      body: "Agent 需要一個共同推理的空間、一種精確承諾工作的方式，以及一條從意圖到核准結果的可課責路徑。MissionWeaveProtocol 讓這些責任清楚可見，同時不會把對話本身變成可執行權限。",
+    },
+    principles: [
+      [
+        "以對等身分交流",
+        "每位 Group 成員都能傳送持久化 Message，並向其他成員請求所需脈絡。",
+      ],
+      [
+        "明確承諾",
+        "WorkItem 與 Work Contract 將可課責的執行和對話意圖清楚分開。",
+      ],
+      [
+        "本機排程",
+        "Worker 將工作接收到各自的 per-Group queue，並保留跨 Group 排序的最終控制權。",
+      ],
+      [
+        "可課責地完成",
+        "Coordinator 在人類核准已完成的 Mission 前驗證 Evidence 與 Artifact。",
+      ],
+    ],
+    panel: {
+      eyebrow: "一個 Mission，一個 Group",
+      title: "從目標到核准結果",
+      badge: "0.1 草案",
+      aria: "Mission 生命週期",
+      steps: [
+        [
+          "MissionOwner",
+          "定義成功標準",
+          "明確目標、邊界、預算、期限和最終核准。",
+        ],
+        [
+          "Coordinator",
+          "規劃並分派",
+          "透過明確的 offer 與 acceptance，將 WorkItem 交給符合條件的 Agent。",
+        ],
+        [
+          "Worker",
+          "協作並執行",
+          "對等方交換脈絡、持有 lease，並發布不可變 Artifact。",
+        ],
+        [
+          "審查",
+          "先驗證，再核准",
+          "Coordinator 檢查 Evidence；人類接受精確的最終結果。",
+        ],
+      ],
+    },
+    scheduler: {
+      eyebrow: "多個 Group，一個 Worker",
+      title: "協調止於 Group 邊界，排程不會。",
+      body: "Coordinator 負責其 Mission 內部的進展。一個 Worker 可以屬於多個 Mission，因此由它自己的 Scheduler 根據 per-Group queue、capacity slot、期限、相依關係和本機策略決定下一項執行的工作。",
+      aria: "per-Group queue 進入 Worker Scheduler 與隔離 capacity slot 的示意圖",
+      queues: "per-Group queue",
+      owned: "Worker 自主管理",
+      scheduler: "Scheduler",
+      policy: "優先順序 · 就緒狀態 · 策略",
+      slots: "capacity slot",
+      running: "執行中",
+      ready: "就緒",
+    },
+    boundaries: [
+      [
+        "為組織而設計",
+        "共享信任，明確權限。",
+        "Organization 控制 Agent 身份、策略、授權和持久化 Group 順序。Agent 在對話中保持對等，而有後果的狀態變更始終結構化、已簽名、有範圍且可稽核。",
+      ],
+      [
+        "刻意排除",
+        "不是另一種 Agent RPC。",
+        "MissionWeaveProtocol 不定義模型 prompt、物理 peer-to-peer 路由、跨組織 federation 或 distributed consensus。它定義一個組織如何安全完成複雜的 Agent 工作。",
+      ],
+    ],
+    closing: {
+      eyebrow: "從草案開始",
+      title: "圍繞工作建構協作，而不只是傳遞訊息。",
+      link: "從 MissionWeaveProtocol 0.1 開始",
+    },
+  },
   ja: {
     intro: {
       eyebrow: "MissionWeaveProtocol を選ぶ理由",
@@ -378,6 +464,174 @@ const copies: Record<Locale, HomeCopy> = {
       title:
         "Construir la cooperación alrededor del trabajo, no solo de los Message.",
       link: "Empezar con MissionWeaveProtocol 0.1",
+    },
+  },
+  fr: {
+    intro: {
+      eyebrow: "Pourquoi MissionWeaveProtocol",
+      title: "Une Mission est bien plus qu’une chaîne d’appels.",
+      body: "Les Agent ont besoin d’un espace commun pour raisonner ensemble, d’un moyen précis de s’engager sur un travail et d’un chemin responsable entre l’intention et le résultat approuvé. MissionWeaveProtocol rend ces responsabilités visibles sans transformer la Conversation en autorité exécutable.",
+    },
+    principles: [
+      [
+        "Échanger entre pairs",
+        "Chaque membre d’un Group peut envoyer des Message durables et demander à ses pairs le contexte dont il a besoin.",
+      ],
+      [
+        "S’engager explicitement",
+        "Les WorkItem et Work Contract séparent l’exécution responsable de l’intention exprimée dans la Conversation.",
+      ],
+      [
+        "Planifier localement",
+        "Les Worker acceptent le travail dans des files par Group et gardent le contrôle final de l’ordre entre les Group.",
+      ],
+      [
+        "Achever de manière responsable",
+        "Les Coordinator vérifient les Evidence et les Artifact avant qu’un humain n’approuve la Mission achevée.",
+      ],
+    ],
+    panel: {
+      eyebrow: "Une Mission, un Group",
+      title: "De l’objectif au résultat approuvé",
+      badge: "Brouillon 0.1",
+      aria: "Cycle de vie d’une Mission",
+      steps: [
+        [
+          "MissionOwner",
+          "Définit la réussite",
+          "Objectif, limites, budget, échéance et Approval finale.",
+        ],
+        [
+          "Coordinator",
+          "Planifie et assigne",
+          "Les WorkItem sont confiés aux Agent éligibles au moyen d’offres et d’acceptations explicites.",
+        ],
+        [
+          "Worker",
+          "Coopèrent et exécutent",
+          "Les pairs échangent du contexte, détiennent des Execution Lease et publient des Artifact immuables.",
+        ],
+        [
+          "Revue",
+          "Vérifier, puis approuver",
+          "Le Coordinator contrôle les Evidence ; l’humain accepte le résultat exact.",
+        ],
+      ],
+    },
+    scheduler: {
+      eyebrow: "Plusieurs Group, un Worker",
+      title:
+        "La coordination s’arrête à la frontière du Group. Pas la planification.",
+      body: "Un Coordinator pilote la progression dans sa Mission. Un Worker peut appartenir à plusieurs Mission ; son propre Scheduler décide donc du prochain travail à exécuter en tenant compte des files par Group, des Capacity Slot, des échéances, des dépendances et de la politique locale.",
+      aria: "Files par Group alimentant un Worker Scheduler et des Capacity Slot isolés",
+      queues: "Files par Group",
+      owned: "Contrôlé par le Worker",
+      scheduler: "Scheduler",
+      policy: "priorité · disponibilité · politique",
+      slots: "Capacity Slot",
+      running: "en cours",
+      ready: "prêt",
+    },
+    boundaries: [
+      [
+        "Conçu pour les organisations",
+        "Confiance partagée, autorité explicite.",
+        "L’Organization contrôle l’identité des Agent, la politique, l’autorisation et l’ordre durable des Group. Les Agent restent des pairs dans la Conversation, tandis que les changements d’état conséquents demeurent structurés, signés, délimités et auditables.",
+      ],
+      [
+        "Délibérément hors périmètre",
+        "Pas un nouvel RPC entre Agent.",
+        "MissionWeaveProtocol ne définit ni les instructions de modèle, ni le routage physique pair à pair, ni la fédération entre Organization, ni le consensus distribué. Il définit comment une Organization mène à bien un travail complexe d’Agent en toute sécurité.",
+      ],
+    ],
+    closing: {
+      eyebrow: "Commencer par le brouillon",
+      title:
+        "Construire la coopération autour du travail, pas seulement des Message.",
+      link: "Découvrir MissionWeaveProtocol 0.1",
+    },
+  },
+  de: {
+    intro: {
+      eyebrow: "Warum MissionWeaveProtocol",
+      title: "Eine Mission ist mehr als eine Kette von Aufrufen.",
+      body: "Agent benötigen einen gemeinsamen Ort zum Denken, eine präzise Form der Arbeitsverpflichtung und einen verantwortbaren Weg von der Absicht zum genehmigten Ergebnis. MissionWeaveProtocol macht diese Verantwortlichkeiten sichtbar, ohne Conversation in ausführbare Autorität zu verwandeln.",
+    },
+    principles: [
+      [
+        "Als Peers sprechen",
+        "Jedes Group-Mitglied kann dauerhafte Message senden und Peers nach dem benötigten Kontext fragen.",
+      ],
+      [
+        "Ausdrücklich verpflichten",
+        "WorkItem und Work Contract trennen verantwortbare Ausführung von der Absicht in Conversation.",
+      ],
+      [
+        "Lokal planen",
+        "Worker nehmen Arbeit in Group-spezifische Warteschlangen auf und behalten die letzte Kontrolle über die Reihenfolge zwischen Group.",
+      ],
+      [
+        "Verantwortlich abschließen",
+        "Coordinator verifizieren Evidence und Artifact, bevor ein Mensch die abgeschlossene Mission genehmigt.",
+      ],
+    ],
+    panel: {
+      eyebrow: "Eine Mission, ein Group",
+      title: "Vom Ziel zum genehmigten Ergebnis",
+      badge: "Entwurf 0.1",
+      aria: "Mission-Lebenszyklus",
+      steps: [
+        [
+          "MissionOwner",
+          "Definiert Erfolg",
+          "Ziel, Grenzen, Budget, Frist und finale Approval.",
+        ],
+        [
+          "Coordinator",
+          "Plant und weist zu",
+          "WorkItem gelangen durch ausdrückliche Angebote und Annahme zu geeigneten Agent.",
+        ],
+        [
+          "Worker",
+          "Kooperieren und führen aus",
+          "Peers tauschen Kontext aus, halten Lease und veröffentlichen unveränderliche Artifact.",
+        ],
+        [
+          "Prüfung",
+          "Verifizieren, dann genehmigen",
+          "Der Coordinator prüft Evidence; der Mensch akzeptiert das genaue Ergebnis.",
+        ],
+      ],
+    },
+    scheduler: {
+      eyebrow: "Viele Group, ein Worker",
+      title: "Koordination endet an der Group-Grenze. Planung nicht.",
+      body: "Ein Coordinator verantwortet den Fortschritt innerhalb seiner Mission. Ein Worker kann vielen Mission angehören; daher entscheidet sein eigener Scheduler anhand Group-spezifischer Warteschlangen, Capacity Slot, Fristen, Abhängigkeiten und lokaler Richtlinien, was als Nächstes ausgeführt wird.",
+      aria: "Group-spezifische Warteschlangen speisen einen Worker Scheduler und isolierte Capacity Slot",
+      queues: "Group-spezifische Warteschlangen",
+      owned: "Im Besitz des Worker",
+      scheduler: "Scheduler",
+      policy: "Priorität · Bereitschaft · Richtlinie",
+      slots: "Capacity Slot",
+      running: "aktiv",
+      ready: "bereit",
+    },
+    boundaries: [
+      [
+        "Für Organization entwickelt",
+        "Gemeinsames Vertrauen, ausdrückliche Autorität.",
+        "Die Organization kontrolliert Agent-Identität, Richtlinien, Autorisierung und dauerhafte Group-Reihenfolge. Agent bleiben in Conversation Peers, während folgenreiche Zustandsänderungen strukturiert, signiert, begrenzt und auditierbar bleiben.",
+      ],
+      [
+        "Bewusst außerhalb des Umfangs",
+        "Kein weiteres Agent RPC.",
+        "MissionWeaveProtocol definiert weder Modell-Prompts, physisches Peer-to-Peer-Routing, organisationsübergreifende Föderation noch verteilten Konsens. Es definiert, wie eine Organization komplexe Arbeit von Agent sicher abschließt.",
+      ],
+    ],
+    closing: {
+      eyebrow: "Mit dem Entwurf beginnen",
+      title: "Zusammenarbeit um Arbeit aufbauen, nicht nur um Message.",
+      link: "Mit MissionWeaveProtocol 0.1 beginnen",
     },
   },
 };
