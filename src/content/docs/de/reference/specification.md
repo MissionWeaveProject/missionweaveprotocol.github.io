@@ -26,7 +26,7 @@ enthält die autoritativen Artefakte:
 
 - [MissionWeaveProtocol 0.1-Spezifikation](https://github.com/missionweaveprotocol/missionweaveprotocol/blob/main/spec/PROTOCOL.md)
 - [Protokollglossar](https://github.com/missionweaveprotocol/missionweaveprotocol/blob/main/CONTEXT.md)
-- [Normative JSON Schemas](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/schemas)
+- [Normative JSON-Schemata](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/schemas)
 - [Konformitätsmanifest und -vektoren](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/conformance)
 
 Wenn dieser Leitfaden und ein normatives Artefakt voneinander abweichen, ist das
