@@ -96,7 +96,7 @@ debe cambiar el estado autoritativo de la Mission.
 - El trabajo exclusivo queda aislado por Ownership Epoch y Execution Lease.
 - Los Event aceptados y los Message confirmados son append-only.
 - El contexto y las credenciales de una Mission están aislados por defecto.
-- Los presupuestos y permisos de un WorkItem y una Child Mission no pueden
+- Los presupuestos y permisos de un WorkItem y una Mission hija no pueden
   superar los de sus elementos padre.
 - Completar una Mission raíz requiere la Approval humana de una revisión exacta
   y un conjunto exacto de Artifact.

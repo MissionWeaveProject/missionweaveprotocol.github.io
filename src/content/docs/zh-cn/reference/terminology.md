@@ -88,8 +88,8 @@ session 和 Ownership Epoch 执行排他 WorkItem。
 
 ## 层级与扩展
 
-**Child
-Mission**：为完成父级 Mission 的某个复杂 WorkItem 而创建的 Mission，其预算和权限相对父级收窄。
+**子任务（Child
+Mission）**：为完成父级 Mission 的某个复杂工作项（WorkItem）而创建的独立 Mission，其预算和权限相对父级收窄。这里的“子任务”不是 WorkItem，而是拥有独立 Group、Coordinator、预算和批准生命周期的 Mission。
 
 **Follow-up
 Mission**：当不可变的已批准 Mission 后续需要纠正或追加工作时，与之链接的新 Mission。

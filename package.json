@@ -15,10 +15,11 @@
     "typecheck": "astro check",
     "check:policy": "node scripts/check-repository-policy.mjs",
     "check:locales": "node scripts/check-locale-source-parity.mjs",
+    "check:terminology": "node scripts/check-locale-terminology.mjs",
     "check:built-site": "node scripts/check-built-site.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run check:policy && npm run check:locales && npm run assets:check && npm run format:check && npm run typecheck && npm run docs:build && npm run check:built-site"
+    "check": "npm run check:policy && npm run check:locales && npm run check:terminology && npm run assets:check && npm run format:check && npm run typecheck && npm run docs:build && npm run check:built-site"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.3",

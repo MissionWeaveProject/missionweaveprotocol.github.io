@@ -123,12 +123,12 @@ export default defineConfig({
             {
               label: "Child Missions",
               translations: {
-                "zh-CN": "子 Mission",
-                "zh-TW": "子 Mission",
-                ja: "子 Mission",
-                es: "Mission secundarias",
-                fr: "Missions enfants",
-                de: "Child Mission",
+                "zh-CN": "子任务",
+                "zh-TW": "子任務",
+                ja: "子ミッション",
+                es: "Mission hija",
+                fr: "Mission enfant",
+                de: "Untergeordnete Mission",
               },
               slug: "docs/0.1/child-missions",
             },
@@ -207,7 +207,7 @@ export default defineConfig({
             {
               label: "Conformance",
               translations: {
-                "zh-CN": "一致性",
+                "zh-CN": "符合性",
                 "zh-TW": "符合性",
                 ja: "適合性",
                 es: "Conformidad",

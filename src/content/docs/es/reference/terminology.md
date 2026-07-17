@@ -112,9 +112,9 @@ después de una Approval humana.
 
 ## Jerarquía y extensiones
 
-**Child Mission**: Una Mission creada para completar un WorkItem complejo de una
-Mission padre, con presupuestos y autoridad más restringidos que los de su
-elemento padre.
+**Mission hija (Child Mission)**: Una Mission creada para completar un WorkItem
+complejo de una Mission padre, con presupuestos y autoridad más restringidos que
+los de la Mission padre.
 
 **Follow-up Mission**: Una nueva Mission enlazada a una Mission aprobada e
 inmutable cuando después se necesita una corrección o trabajo adicional.

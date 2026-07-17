@@ -67,7 +67,7 @@ uv run missionweaveprotocol-demo --workdir .missionweaveprotocol/poc
 
 La commande produit un rapport JSON canonique et se termine avec un statut non
 nul si un comportement requis manque. Le scénario déterministe couvre deux
-Mission concurrentes, des Worker partagés, des Child Mission, la clarification
+Mission concurrentes, des Worker partagés, une Mission enfant, la clarification
 entre pairs, la planification, la préemption uniquement aux Checkpoint, la
 récupération, la vérification du Coordinator et une Approval humaine exacte.
 
