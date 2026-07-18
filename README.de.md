@@ -20,7 +20,7 @@ npm ci
 npm run docs:dev
 ```
 
-Führe vor dem Öffnen eines Pull Request die vollständige lokale Prüfung aus:
+Führe vor dem Öffnen eines Pull Requests die vollständige lokale Prüfung aus:
 
 ```bash
 npm run check

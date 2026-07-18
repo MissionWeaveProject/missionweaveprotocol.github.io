@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -10,6 +10,35 @@ const config = await readFile(
 );
 const failures = [];
 const normalizeWhitespace = (value) => value.replace(/\s+/gu, " ").trim();
+const contentExtensions = new Set([".md", ".mdx"]);
+
+function withoutAllowedDefinitions(contents, firstForms) {
+  let result = normalizeWhitespace(contents);
+  for (const form of firstForms) {
+    result = result.replaceAll(form, "");
+  }
+  return result;
+}
+
+async function collectContentFiles(directory, prefix = "") {
+  const entries = (await readdir(directory, { withFileTypes: true })).sort(
+    (left, right) => left.name.localeCompare(right.name),
+  );
+  const files = [];
+
+  for (const entry of entries) {
+    const relativePath = path.posix.join(prefix, entry.name);
+    const absolutePath = path.join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...(await collectContentFiles(absolutePath, relativePath)));
+    } else if (contentExtensions.has(path.extname(entry.name))) {
+      files.push(relativePath);
+    }
+  }
+
+  return files;
+}
 
 const sharedDiagramEnglish = [
   "Root Mission and Group",
@@ -29,7 +58,7 @@ const localeRules = [
     term: "子任务",
     firstForms: ["子任务（Child Mission）"],
     navigation: '"zh-CN": "子任务"',
-    forbidden: [/子\s+Mission/gu],
+    forbidden: [/子\s*Mission/gu, /子使命/gu, /子任務/gu],
     childRequirements: ["子任务内的工作项", "不是 WorkItem"],
   },
   {
@@ -38,7 +67,7 @@ const localeRules = [
     term: "子任務",
     firstForms: ["子任務（Child Mission）"],
     navigation: '"zh-TW": "子任務"',
-    forbidden: [/子\s+Mission/gu],
+    forbidden: [/子\s*Mission/gu, /子使命/gu, /子任务/gu],
     childRequirements: ["子任務內的工作項", "不是 WorkItem"],
   },
   {
@@ -47,7 +76,7 @@ const localeRules = [
     term: "サブタスク",
     firstForms: ["サブタスク（Child Mission）"],
     navigation: 'ja: "サブタスク"',
-    forbidden: [/子\s+Mission/gu, /子ミッション/gu],
+    forbidden: [/子\s*Mission/gu, /子ミッション/gu, /サブミッション/gu],
     childRequirements: ["サブタスク内の WorkItem", "WorkItem ではありません"],
   },
   {
@@ -56,7 +85,11 @@ const localeRules = [
     term: "subtarea",
     firstForms: ["subtarea (Child Mission)"],
     navigation: 'es: "Subtarea"',
-    forbidden: [/Mission secundaria(?:s)?/giu, /Mission hija(?:s)?/giu],
+    forbidden: [
+      /(?:Missions?|Misi(?:[oó]n|ones)) secundaria(?:s)?/giu,
+      /(?:Missions?|Misi(?:[oó]n|ones)) hija(?:s)?/giu,
+      /submisi(?:ón|ones)/giu,
+    ],
     childRequirements: ["WorkItem de la subtarea", "no es un WorkItem"],
   },
   {
@@ -65,7 +98,11 @@ const localeRules = [
     term: "sous-tâche",
     firstForms: ["sous-tâche (Child Mission)"],
     navigation: 'fr: "Sous-tâche"',
-    forbidden: [/Mission(?:s)? enfant(?:s)?/giu],
+    forbidden: [
+      /Mission(?:s)? enfant(?:s)?/giu,
+      /sous-missions?/giu,
+      /missions? filles?/giu,
+    ],
     childRequirements: ["WorkItem de la sous-tâche", "pas un WorkItem"],
   },
   {
@@ -74,10 +111,56 @@ const localeRules = [
     term: "Unteraufgabe",
     firstForms: ["Unteraufgabe (Child Mission)"],
     navigation: 'de: "Unteraufgabe"',
-    forbidden: [/untergeordnet\p{L}*\s+Mission\p{L}*/giu],
+    forbidden: [
+      /untergeordnet\p{L}*\s+Mission\p{L}*/giu,
+      /Kindmission(?:en)?/giu,
+      /Teilmission(?:en)?/giu,
+    ],
     childRequirements: ["WorkItem der Unteraufgabe", "kein WorkItem"],
   },
 ];
+
+const homeStoryLocaleMarkers = [
+  { locale: "zh-CN", marker: '  "zh-CN": {' },
+  { locale: "zh-TW", marker: '  "zh-TW": {' },
+  { locale: "ja", marker: "  ja: {" },
+  { locale: "es", marker: "  es: {" },
+  { locale: "fr", marker: "  fr: {" },
+  { locale: "de", marker: "  de: {" },
+];
+
+function extractHomeStoryLocaleBlock(source, locale) {
+  const markerIndex = homeStoryLocaleMarkers.findIndex(
+    (candidate) => candidate.locale === locale,
+  );
+  const marker = homeStoryLocaleMarkers[markerIndex]?.marker;
+  if (marker === undefined) {
+    failures.push(`src/components/HomeStory.astro: missing ${locale} marker`);
+    return "";
+  }
+
+  const start = source.indexOf(marker);
+  if (start === -1) {
+    failures.push(
+      `src/components/HomeStory.astro: missing ${locale} copy block`,
+    );
+    return "";
+  }
+
+  const nextMarker = homeStoryLocaleMarkers[markerIndex + 1]?.marker;
+  const end =
+    nextMarker === undefined
+      ? source.indexOf("\n};", start + marker.length)
+      : source.indexOf(nextMarker, start + marker.length);
+  if (end === -1) {
+    failures.push(
+      `src/components/HomeStory.astro: unterminated ${locale} copy block`,
+    );
+    return "";
+  }
+
+  return source.slice(start, end);
+}
 
 const requiredPaths = [
   "docs/0.1/child-missions.md",
@@ -86,6 +169,10 @@ const requiredPaths = [
   "reference/terminology.md",
   "sdk/python/index.md",
 ];
+const allContentFiles = await collectContentFiles(contentRoot);
+const localizedContentPathCount = allContentFiles.filter((file) =>
+  file.startsWith(`${localeRules[0].directory}/`),
+).length;
 
 for (const rule of localeRules) {
   if (!config.includes(rule.navigation)) {
@@ -94,11 +181,38 @@ for (const rule of localeRules) {
     );
   }
 
-  const localizedBodies = [];
+  const localePrefix = `${rule.directory}/`;
+  const localizedBodies = await Promise.all(
+    allContentFiles
+      .filter((file) => file.startsWith(localePrefix))
+      .map(async (relativeFile) => {
+        const file = path.join(contentRoot, relativeFile);
+        return {
+          contents: await readFile(file, "utf8"),
+          file,
+          relativePath: relativeFile.slice(localePrefix.length),
+        };
+      }),
+  );
+  const localizedByPath = new Map(
+    localizedBodies.map((body) => [body.relativePath, body]),
+  );
+
+  if (localizedBodies.length !== localizedContentPathCount) {
+    failures.push(
+      `${rule.directory}: expected ${localizedContentPathCount} localized content paths, found ${localizedBodies.length}`,
+    );
+  }
+
   for (const relativePath of requiredPaths) {
-    const file = path.join(contentRoot, rule.directory, relativePath);
-    const contents = await readFile(file, "utf8");
-    localizedBodies.push({ file, contents });
+    const localizedBody = localizedByPath.get(relativePath);
+    if (localizedBody === undefined) {
+      failures.push(
+        `${rule.directory}/${relativePath}: missing content source`,
+      );
+      continue;
+    }
+    const { contents, file } = localizedBody;
 
     if (
       !normalizeWhitespace(contents)
@@ -116,13 +230,9 @@ for (const rule of localeRules) {
     "reference/terminology.md",
   ]) {
     const body = normalizeWhitespace(
-      localizedBodies.find(({ file }) => file.endsWith(requiredDefinition))
-        ?.contents ?? "",
+      localizedByPath.get(requiredDefinition)?.contents ?? "",
     );
-    if (
-      body === undefined ||
-      !rule.firstForms.some((form) => body.includes(form))
-    ) {
+    if (!rule.firstForms.some((form) => body.includes(form))) {
       failures.push(
         `${rule.directory}/${requiredDefinition}: missing first-use Child Mission definition`,
       );
@@ -132,11 +242,10 @@ for (const rule of localeRules) {
   const combinedRaw = localizedBodies
     .map(({ contents }) => contents)
     .join("\n");
-  const combined = normalizeWhitespace(combinedRaw);
-  let withoutDefinitions = combined;
-  for (const form of rule.firstForms) {
-    withoutDefinitions = withoutDefinitions.replaceAll(form, "");
-  }
+  const withoutDefinitions = withoutAllowedDefinitions(
+    combinedRaw,
+    rule.firstForms,
+  );
   if (/child mission/iu.test(withoutDefinitions)) {
     failures.push(
       `${rule.directory}: unlocalized Child Mission remains outside a first definition`,
@@ -153,9 +262,7 @@ for (const rule of localeRules) {
   }
 
   const childPage = normalizeWhitespace(
-    localizedBodies.find(({ file }) =>
-      file.endsWith("docs/0.1/child-missions.md"),
-    )?.contents ?? "",
+    localizedByPath.get("docs/0.1/child-missions.md")?.contents ?? "",
   );
   for (const phrase of sharedDiagramEnglish) {
     if (childPage?.includes(phrase)) {
@@ -177,6 +284,32 @@ const homeStory = await readFile(
   path.join(repositoryRoot, "src/components/HomeStory.astro"),
   "utf8",
 );
+
+for (const rule of localeRules) {
+  const localizedHomeStory = extractHomeStoryLocaleBlock(
+    homeStory,
+    rule.locale,
+  );
+  if (
+    /child mission/iu.test(
+      withoutAllowedDefinitions(localizedHomeStory, rule.firstForms),
+    )
+  ) {
+    failures.push(
+      `src/components/HomeStory.astro:${rule.locale}: unlocalized Child Mission remains outside a first definition`,
+    );
+  }
+
+  for (const pattern of rule.forbidden) {
+    pattern.lastIndex = 0;
+    if (pattern.test(localizedHomeStory)) {
+      failures.push(
+        `src/components/HomeStory.astro:${rule.locale}: retired Child Mission wording matches ${pattern}`,
+      );
+    }
+  }
+}
+
 const zhCnHome = await readFile(
   path.join(contentRoot, "zh-cn/index.mdx"),
   "utf8",
@@ -218,5 +351,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  `Locale terminology passed for ${localeRules.length} localized Child Mission vocabularies.`,
+  `Locale terminology passed for ${localeRules.length} localized Child Mission vocabularies across ${localizedContentPathCount} content paths.`,
 );
