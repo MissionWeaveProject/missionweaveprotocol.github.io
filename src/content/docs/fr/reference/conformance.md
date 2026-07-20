@@ -1,20 +1,20 @@
 ---
 title: Conformité
 description:
-  Exécuter les 52 vecteurs de conformité de MissionWeaveProtocol indépendants de
+  Exécuter les 56 vecteurs de conformité de MissionWeaveProtocol indépendants de
   l’implémentation.
 sidebar:
   label: Conformité
   order: 3
 ---
 
-MissionWeaveProtocol 0.1 fournit **52 cas de conformité indépendants de
+MissionWeaveProtocol 0.1 fournit **56 cas de conformité indépendants de
 l’implémentation** :
 
 | Résultat attendu | Cas | Répertoire canonique                                                                                                                 |
 | ---------------- | --: | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Valide           |  25 | [`conformance/vectors/valid/`](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/conformance/vectors/valid)     |
-| Invalide         |  27 | [`conformance/vectors/invalid/`](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/conformance/vectors/invalid) |
+| Valide           |  26 | [`conformance/vectors/valid/`](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/conformance/vectors/valid)     |
+| Invalide         |  30 | [`conformance/vectors/invalid/`](https://github.com/missionweaveprotocol/missionweaveprotocol/tree/main/conformance/vectors/invalid) |
 
 Le fichier canonique
 [`manifest.json`](https://github.com/missionweaveprotocol/missionweaveprotocol/blob/main/conformance/manifest.json)
@@ -25,7 +25,7 @@ pour les exigences normatives d’utilisation.
 
 ## Ce que prouvent les vecteurs
 
-L’exécution des 52 cas vérifie qu’une implémentation respecte les règles
+L’exécution des 56 cas vérifie qu’une implémentation respecte les règles
 structurelles du protocole pour les documents. Les cas invalides couvrent des
 formes délibérément rejetées, telles que des signatures manquantes, des états de
 cycle de vie invalides, un ownership absent, un comportement d’extension

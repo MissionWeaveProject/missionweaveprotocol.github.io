@@ -12,22 +12,22 @@ MissionWeaveProtocol provides a full Python reference implementation and five
 official protocol SDKs. Each SDK is versioned independently and pins the exact
 protocol commit and artifact digests that it implements. The counts below
 reflect protocol commit
-[`6f10987`](https://github.com/missionweaveprotocol/missionweaveprotocol/commit/6f10987627d62fb296e3490ceceb5539b1e94b70).
+[`33e47ad`](https://github.com/missionweaveprotocol/missionweaveprotocol/commit/33e47ad8a7318f942de77fb72dbb054d85881b40).
 
 ## Capability and status matrix
 
 | SDK                                                                  | Current scope                 | Protocol bindings | Schema and vector conformance | Full behavioral runtime |
 | -------------------------------------------------------------------- | ----------------------------- | ----------------- | ----------------------------- | ----------------------- |
-| [Python](https://github.com/missionweaveprotocol/python-sdk)         | Full reference implementation | Yes               | 52/52 vectors                 | Yes                     |
-| [Go](https://github.com/missionweaveprotocol/go-sdk)                 | Official protocol SDK         | Yes               | 52/52 vectors                 | No                      |
-| [TypeScript](https://github.com/missionweaveprotocol/typescript-sdk) | Official protocol SDK         | Yes               | 52/52 vectors                 | No                      |
-| [Java](https://github.com/missionweaveprotocol/java-sdk)             | Official protocol SDK         | Yes               | 52/52 vectors                 | No                      |
-| [Rust](https://github.com/missionweaveprotocol/rust-sdk)             | Official protocol SDK         | Yes               | 52/52 vectors                 | No                      |
-| [C++](https://github.com/missionweaveprotocol/cpp-sdk)               | Official protocol SDK         | Yes               | 52/52 vectors                 | No                      |
+| [Python](https://github.com/missionweaveprotocol/python-sdk)         | Full reference implementation | Yes               | 56/56 vectors                 | Yes                     |
+| [Go](https://github.com/missionweaveprotocol/go-sdk)                 | Official protocol SDK         | Yes               | 56/56 vectors                 | No                      |
+| [TypeScript](https://github.com/missionweaveprotocol/typescript-sdk) | Official protocol SDK         | Yes               | 56/56 vectors                 | No                      |
+| [Java](https://github.com/missionweaveprotocol/java-sdk)             | Official protocol SDK         | Yes               | 56/56 vectors                 | No                      |
+| [Rust](https://github.com/missionweaveprotocol/rust-sdk)             | Official protocol SDK         | Yes               | 56/56 vectors                 | No                      |
+| [C++](https://github.com/missionweaveprotocol/cpp-sdk)               | Official protocol SDK         | Yes               | 56/56 vectors                 | No                      |
 
 Schema-and-vector conformance covers strict JSON handling, offline validation
 against the 21 pinned Draft 2020-12 schemas, canonical JSON and content IDs,
-Ed25519 signatures, frame validation, and the 52 pinned conformance vectors. It
+Ed25519 signatures, frame validation, and the 56 pinned conformance vectors. It
 does not by itself establish conformance for scheduling, persistence, recovery,
 transport, or other runtime behavior.
 

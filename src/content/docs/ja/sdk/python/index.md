@@ -46,7 +46,7 @@ uv run mypy
 uv run missionweaveprotocol-conformance --root .
 ```
 
-適合性 command は、同梱された 52 個の vector すべてを、同梱された 21 個の Draft
+適合性 command は、同梱された 56 個の vector すべてを、同梱された 21 個の Draft
 2020-12 schema に対して検証します。プロトコルリポジトリが引き続き規範となり、
 [`PROTOCOL_PIN.json`](https://github.com/missionweaveprotocol/python-sdk/blob/main/PROTOCOL_PIN.json)
 には SDK が使用する正確な protocol commit と artifact
