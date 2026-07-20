@@ -47,7 +47,7 @@ uv run mypy
 uv run missionweaveprotocol-conformance --root .
 ```
 
-El comando de conformidad comprueba los 52 vectores incluidos frente a los 21
+El comando de conformidad comprueba los 56 vectores incluidos frente a los 21
 schemas Draft 2020-12 incluidos. El repositorio del protocolo sigue siendo
 normativo;
 [`PROTOCOL_PIN.json`](https://github.com/missionweaveprotocol/python-sdk/blob/main/PROTOCOL_PIN.json)

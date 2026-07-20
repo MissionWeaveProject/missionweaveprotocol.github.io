@@ -47,7 +47,7 @@ uv run mypy
 uv run missionweaveprotocol-conformance --root .
 ```
 
-Der Konformitäts-Command prüft alle 52 eingebetteten Vektoren gegen die 21
+Der Konformitäts-Command prüft alle 56 eingebetteten Vektoren gegen die 21
 eingebetteten Schemas nach Draft 2020-12. Das Protokoll-Repository bleibt
 normativ;
 [`PROTOCOL_PIN.json`](https://github.com/missionweaveprotocol/python-sdk/blob/main/PROTOCOL_PIN.json)
